@@ -1,16 +1,29 @@
 package modular.json.consumer;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ServiceLoader;
 
+import modular.core.ContentType;
+import modular.core.IContentSearch;
 import modular.json.deserializer.api.IJsonDeserializer;
 import modular.json.factory.JsonDeserializerFactory;
 import modular.json.factory.JsonSerializerFactory;
 import modular.json.serializer.api.IJsonSerializer;
+import org.apache.commons.collections4.IteratorUtils;
 
 public class JsonDriver {
 
 	public static void main(String[] args) throws IOException {
-		deserialize(serialize());
+		String serializedJson = serialize();
+		deserialize(serializedJson);
+		ServiceLoader<IContentSearch> services = ServiceLoader.load(IContentSearch.class);
+		Iterator<IContentSearch> it = services.iterator();
+		List<IContentSearch> searchServices = IteratorUtils.toList(it);
+		searchServices.stream().forEach(svc -> {
+			System.out.println(svc.search(serializedJson,"$.name", ContentType.JSON));
+		});
 	}
 	
 	private static String serialize() {

@@ -13,7 +13,8 @@
 		<module>json-handler</module>
 		<module>service-consumer</module>
 		<module>xml-handler</module>
-	</modules>
+        <module>core</module>
+    </modules>
 	<build>
 		<resources>
 			<resource>

@@ -2,21 +2,26 @@ package modular.json.runner;
 
 import java.io.IOException;
 
+import modular.core.ContentType;
 import modular.json.deserializer.impl.JsonDeserializer;
+import modular.json.search.JsonValueSearch;
 import modular.json.serializer.impl.JsonSerializer;
 
 public class Driver {
 
 	public static void main(String[] args) throws IOException {
-		deserialize(serialize());
+		String serializedJson = serialize();
+		deserialize(serializedJson);
+		String searchResult = new JsonValueSearch().search(serializedJson,"$.name", ContentType.JSON).get();
+		System.out.println(searchResult);
 	}
 	
 	private static String serialize() {
 		JsonSerializer<Book> serializer = new JsonSerializer<>();
 		var book = new Book(1L,"Microservices","Sam Newman");
-		String serializedXml = serializer.serialize(book);
-		System.out.println(serializedXml);
-		return serializedXml;
+		String serializedJson = serializer.serialize(book);
+		System.out.println(serializedJson);
+		return serializedJson;
 	}
 	
 	private static void deserialize(String xml) {

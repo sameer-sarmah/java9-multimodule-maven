@@ -8,4 +8,8 @@ module json.handler{
 	requires transitive  jackson.annotations;
 	requires transitive  jackson.databind;
 	opens modular.json.runner to jackson.databind;
+	requires modular.core;
+	requires commons.lang3;
+	requires json.path;
+	provides modular.core.IContentSearch with modular.json.search.JsonValueSearch;
 }

@@ -4,13 +4,17 @@ import java.io.IOException;
 
 import jakarta.xml.bind.JAXBException;
 import jakarta.xml.bind.annotation.XmlRootElement;
+import modular.core.ContentType;
 import modular.xml.deserializer.impl.JaxbXmlDeserializer;
+import modular.xml.search.XmlValueSearch;
 import modular.xml.serializer.impl.JaxbXmlSerializer;
 
 public class Driver {
 
 	public static void main(String[] args) throws JAXBException, IOException {
-		deserialize(serialize());
+		String serializedXml = serialize();
+		deserialize(serializedXml);
+		System.out.println(new XmlValueSearch().search(serializedXml,"//author[(contains(.,'Sam Newman'))]", ContentType.XML));
 	}
 	
 	private static String serialize() {

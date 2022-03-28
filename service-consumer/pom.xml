@@ -13,6 +13,11 @@
 		<sun.xml.version>3.0.2</sun.xml.version>
 	</properties>
 		<dependencies>
+			<dependency>
+				<groupId>modular</groupId>
+				<artifactId>core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 		<dependency>
 			<groupId>com.sun.xml.bind</groupId>
 			<artifactId>jaxb-core</artifactId>
@@ -43,22 +48,10 @@
 			<artifactId>json.handler</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.1</version>
+		</dependency>
 	</dependencies>
-  	<build>
-		<plugins>
-			<plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <mainClass>modular.xml.consumer.XmlDriver</mainClass>
-                        </manifest>
-                    </archive>
-                    <outputDirectory>../libs</outputDirectory>
-                </configuration>
-            </plugin>
-		</plugins>
-	</build>
 </project>
